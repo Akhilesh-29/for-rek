@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#18061a">
+  <title>For Rekha — With All My Love, Akki</title>
+  <meta name="description" content="A digital love letter and memory journal from Akki to Rekha.">
+
+  <!-- Google Fonts Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Dancing+Script:wght@500;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Ambient Background Glow & Floating Petals Canvas -->
+  <div class="ambient-glow" aria-hidden="true"></div>
+  <canvas id="petals-canvas" aria-hidden="true"></canvas>
+
+  <!-- Top Controls: Sound Toggle -->
+  <header class="top-bar">
+    <button id="music-toggle" class="icon-btn" aria-label="Toggle background music" title="Toggle Music">
+      <div class="music-wave" aria-hidden="true">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <span class="music-label">Music</span>
+    </button>
+  </header>
+
+  <!-- Floating Easter Egg: "Open when you miss me" Pill -->
+  <div class="floating-miss-me">
+    <button id="miss-me-btn" class="pill-btn" aria-label="Open when you miss me note">
+      <span class="heart-icon" aria-hidden="true">💌</span>
+      <span>Open when you miss me</span>
+    </button>
+  </div>
+
+  <!-- =========================================================================
+       1. OPENING SCREEN (THE WAX SEAL CURTAIN)
+       ========================================================================= -->
+  <div id="intro-screen" role="dialog" aria-modal="true" aria-label="Welcome screen">
+    <div class="intro-content">
+      <p class="intro-whisper">Hey <span class="her-name">Rekha</span>...</p>
+      <h1 class="intro-title">I made something special for you.</h1>
+      
+      <div class="intro-btn-wrap">
+        <button id="open-btn" class="open-seal-btn" aria-label="Open your love letter">
+          <span class="seal-heart">💖</span>
+          <span>Open</span>
+          <div class="seal-ring" aria-hidden="true"></div>
+        </button>
+      </div>
+
+      <p class="intro-subhint">Turn your sound on for the full experience ✨</p>
+    </div>
+  </div>
+
+  <!-- MAIN SCROLLABLE CONTENT -->
+  <main id="main-content">
+
+    <!-- =======================================================================
+         2. HERO SECTION & LIVE LOVE COUNTER
+         ======================================================================= -->
+    <section class="hero-section">
+      <div class="container hero-content">
+        <div class="hero-badge reveal">
+          <span>A gift from my heart to yours</span>
+        </div>
+
+        <h1 id="hero-names" class="hero-names reveal">Rekha <span class="amp">&</span> Akki</h1>
+        <p id="hero-quote" class="hero-quote reveal">
+          "In a world full of fleeting moments, every single second with you is my forever."
+        </p>
+
+        <!-- Live Love Counter Card -->
+        <div class="counter-card reveal">
+          <div class="counter-header">
+            Cherishing every second of us for...
+          </div>
+          <div class="counter-grid" id="counter-grid" aria-live="polite">
+            <div class="counter-item">
+              <span id="cnt-years" class="counter-num">0</span>
+              <span class="counter-lbl">Years</span>
+            </div>
+            <div class="counter-item">
+              <span id="cnt-months" class="counter-num">0</span>
+              <span class="counter-lbl">Months</span>
+            </div>
+            <div class="counter-item">
+              <span id="cnt-days" class="counter-num">0</span>
+              <span class="counter-lbl">Days</span>
+            </div>
+            <div class="counter-item">
+              <span id="cnt-hours" class="counter-num">00</span>
+              <span class="counter-lbl">Hours</span>
+            </div>
+            <div class="counter-item">
+              <span id="cnt-minutes" class="counter-num">00</span>
+              <span class="counter-lbl">Mins</span>
+            </div>
+            <div class="counter-item">
+              <span id="cnt-seconds" class="counter-num">00</span>
+              <span class="counter-lbl">Secs</span>
+            </div>
+          </div>
+        </div>
+
+        <a href="#story" class="scroll-indicator" aria-label="Scroll to read our story">
+          <span>Scroll to begin our story</span>
+          <svg viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+        </a>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         3. OUR STORY TIMELINE
+         ======================================================================= -->
+    <section id="story" class="section">
+      <div class="container">
+        <header class="section-header reveal">
+          <span class="section-tag">Chapters of Us</span>
+          <h2 class="section-title">The Moments That Made Us</h2>
+          <p class="section-desc">How quiet everyday seconds turned into the greatest adventure of my life.</p>
+        </header>
+
+        <div class="timeline" id="story-timeline">
+          <!-- Dynamically populated from CONFIG.STORY_MOMENTS in script.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         4. "WHY I LOVE YOU" INTERACTIVE HEART CARDS
+         ======================================================================= -->
+    <section id="reasons" class="section">
+      <div class="container">
+        <header class="section-header reveal">
+          <span class="section-tag">A Few Reminders</span>
+          <h2 class="section-title">Why I Love You</h2>
+          <p class="section-desc">Tap each little heart to unwrap a reason you are so deeply adored.</p>
+        </header>
+
+        <div class="reasons-grid" id="reasons-grid">
+          <!-- Dynamically populated from CONFIG.REASONS_I_LOVE_YOU in script.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         5. PHOTO GALLERY (POLAROID MEMORIES)
+         ======================================================================= -->
+    <section id="gallery" class="section">
+      <div class="container">
+        <header class="section-header reveal">
+          <span class="section-tag">Captured In Time</span>
+          <h2 class="section-title">Snapshots of My Favorite Smile</h2>
+          <p class="section-desc">Every picture of you holds a quiet piece of poetry I never want to forget.</p>
+        </header>
+
+        <div class="gallery-grid" id="gallery-grid">
+          <!-- Dynamically populated from CONFIG.PHOTOS in script.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Photo Lightbox Modal -->
+    <div id="photo-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-label="Photo Lightbox">
+      <div class="modal-content">
+        <button id="modal-close" class="modal-close-btn" aria-label="Close photo view">&times;</button>
+        <img id="modal-img" class="modal-img-preview" src="" alt="Enlarged photo memory">
+        <div id="modal-caption" class="modal-caption"></div>
+      </div>
+    </div>
+
+    <!-- =======================================================================
+         6. LOVE LETTER (SLOW TYPEWRITER ON SCROLL)
+         ======================================================================= -->
+    <section id="letter" class="section">
+      <div class="container letter-wrapper">
+        <header class="section-header reveal">
+          <span class="section-tag">From My Soul</span>
+          <h2 class="section-title">A Letter For Your Heart</h2>
+        </header>
+
+        <article class="parchment reveal">
+          <div class="letter-wax-header">
+            <!-- Easter Egg: clicking the letter stamp reveals a secret love message! -->
+            <button id="secret-heart" class="letter-stamp secret-heart-trigger" title="A tiny secret is hidden here..." aria-label="Secret heart easter egg">
+              💌
+            </button>
+          </div>
+
+          <div class="letter-salutation">
+            Dearest <span class="her-name">Rekha</span>,
+          </div>
+
+          <div class="letter-body" id="letter-body">
+            <!-- Types out gracefully line by line -->
+          </div>
+
+          <div class="letter-signature">
+            Forever yours,<br>
+            <span class="his-name">Akki</span>
+          </div>
+
+          <div class="letter-actions">
+            <button id="skip-letter-btn" class="text-btn">Read full letter instantly</button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         7. LITTLE PROMISES
+         ======================================================================= -->
+    <section id="promises" class="section">
+      <div class="container">
+        <header class="section-header reveal">
+          <span class="section-tag">My Vows to You</span>
+          <h2 class="section-title">Little Promises I Make to You</h2>
+          <p class="section-desc">Quiet promises I carry in my heart and choose to keep every single day.</p>
+        </header>
+
+        <div class="promises-list" id="promises-list">
+          <!-- Dynamically populated from CONFIG.PROMISES in script.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         8. FINALE (NIGHT SKY & CONSTELLATION HEART)
+         ======================================================================= -->
+    <section id="finale" class="finale-section">
+      <canvas id="constellation-canvas" aria-hidden="true"></canvas>
+
+      <div class="container finale-content">
+        <p class="finale-tag reveal">Under the same sky</p>
+        <h2 id="finale-question" class="finale-question reveal">Will you keep choosing me, Rekha?</h2>
+
+        <div class="choice-buttons reveal">
+          <button id="btn-yes" class="choice-btn">Yes</button>
+          <button id="btn-always" class="choice-btn">Always</button>
+        </div>
+
+        <div id="finale-response" class="finale-response" role="alert">
+          <p id="finale-response-msg" class="finale-response-msg">
+            Forever and always, my love. Happy moments, warm hugs, and all of my heart are yours.
+          </p>
+          <div id="finale-signoff" class="finale-signoff">Forever yours, Akki</div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =========================================================================
+       MODALS FOR EASTER EGGS
+       ========================================================================= -->
+
+  <!-- Secret Heart Modal -->
+  <div id="secret-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-label="Secret Love Note">
+    <div class="modal-content">
+      <button id="secret-modal-close" class="modal-close-btn" aria-label="Close secret note">&times;</button>
+      <div style="font-size: 2.8rem; margin-bottom: 0.8rem;">💖</div>
+      <h3 style="font-family: var(--font-serif); font-size: 1.8rem; color: var(--accent-gold); margin-bottom: 1rem;">
+        You Found My Secret Heart!
+      </h3>
+      <p style="font-family: var(--font-serif); font-size: 1.15rem; line-height: 1.8; color: var(--accent-cream); font-style: italic;">
+        Just a gentle reminder: no matter how hidden or quiet things seem, every single beat of my heart belongs completely to you, Rekha.
+      </p>
+    </div>
+  </div>
+
+  <!-- "Open When You Miss Me" Modal -->
+  <div id="miss-me-modal" class="modal-overlay miss-me-modal" role="dialog" aria-modal="true" aria-label="Open when you miss me">
+    <div class="modal-content">
+      <button id="miss-me-close" class="modal-close-btn" aria-label="Close note">&times;</button>
+      <div style="font-size: 2.8rem; margin-bottom: 0.8rem;">💌</div>
+      <h3 style="font-family: var(--font-serif); font-size: 1.8rem; color: var(--accent-gold); margin-bottom: 0.8rem;">
+        When You Miss Me...
+      </h3>
+      <p style="font-size: 1.05rem; line-height: 1.7; color: var(--accent-cream); font-weight: 300; margin-bottom: 1.2rem;">
+        Take a deep breath and close your eyes. Remember how much you are loved, how deeply cherished you are, and that I'm always thinking of you, even when we are miles or moments apart.
+      </p>
+      
+      <div id="hug-box" class="hug-animation-box" aria-hidden="true">🫂💖✨</div>
+      <button id="hug-btn" class="hug-button">Send me a virtual warm hug</button>
+      
+      <p style="font-family: var(--font-script); font-size: 1.4rem; color: var(--accent-rose); margin-top: 0.8rem;">
+        Always right here for you.
+      </p>
+    </div>
+  </div>
+
+  <!-- Core JavaScript -->
+  <script src="script.js"></script>
+</body>
+</html>
